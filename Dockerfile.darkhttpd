@@ -1,0 +1,8 @@
+FROM alpine:3.7
+ARG WEBSITE=website
+ENV WEBSITE=$WEBSITE
+RUN apk update
+RUN apk add darkhttpd
+COPY $WEBSITE /car/www/localhost/htdocs/$WEBSITE
+USER darkhttpd
+CMD darkhttpd /car/www/localhost/htdocs/$WEBSITE --port 8080 --no-server-id
